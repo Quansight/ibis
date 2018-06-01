@@ -331,17 +331,14 @@ class PandasClient(client.Client):
         return tables
 
 
-    def load_data(self, table_name, obj, database=None):
+    def load_data(self, table_name, obj, **kwargs):
         """
-        Wraps the LOAD DATA DDL statement. Loads data into an MapD table by
-        physically moving data files.
-
         Parameters
         ----------
         table_name : string
-        obj: pandas.DataFrame or pyarrow.Table
-        database : string, default None (optional)
+        obj: pandas.DataFrame
         """
+        # kwargs is a catch all for any options required by other backends.
         self.dictionary[table_name] = pd.DataFrame(obj)
 
     def create_table(self, table_name, obj=None, schema=None):
