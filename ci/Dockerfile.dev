@@ -1,8 +1,11 @@
 FROM continuumio/miniconda3
 
 # MSSQL Driver Setup
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-  && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+RUN apt-get -qq update --yes \
+ && apt-get -qq install --yes --no-install-recommends gpg curl \
+ && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+ && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+ && rm -rf /var/lib/apt/lists/*
 
 ENV ACCEPT_EULA=Y
 
