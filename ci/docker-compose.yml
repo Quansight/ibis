@@ -110,7 +110,7 @@ services:
     image: jwilder/dockerize
     command: |
       dockerize -wait tcp://omniscidb:6274
-                -waut tcp://mssql:1433
+                -wait tcp://mssql:1433
                 -wait tcp://mysql:3306
                 -wait tcp://postgres:5432
                 -wait tcp://impala:21050
