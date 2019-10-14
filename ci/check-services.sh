@@ -8,7 +8,7 @@ if [ $DOCKER_CODE -eq 0 ]
 then
   echo "[II] Done."
 else
-  for s in 'clickhouse' 'impala' 'kudu-master' 'kudu-tserver' 'mysql' 'omniscidb' 'postgres'
+  for s in 'clickhouse' 'impala' 'kudu-master' 'kudu-tserver' 'mssql' 'mysql' 'omniscidb' 'postgres'
   do
     docker container ls
     echo "=============================================================="
