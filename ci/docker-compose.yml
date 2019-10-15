@@ -16,7 +16,7 @@ services:
       - 1433:1433
     environment:
       ACCEPT_EULA: Y
-      SA_PASSWORD: Rootm3plz
+      SA_PASSWORD: Ibis_MSSQL_2017
 
   mysql:
     image: mariadb:10.2
