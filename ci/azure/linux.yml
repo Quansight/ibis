@@ -42,6 +42,7 @@ jobs:
 
     - bash: |
         docker-compose up -d --no-build \
+          mssql \
           mysql \
           postgres \
           impala \
@@ -181,6 +182,7 @@ jobs:
   steps:
     - bash: |
         docker-compose up -d --no-build \
+          mssql \
           mysql \
           postgres \
           impala \
