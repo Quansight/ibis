@@ -7,6 +7,7 @@ declare -A argcommands=([sqlite]=sqlite
                         [postgres]=postgres
                         [clickhouse]=clickhouse
                         [omniscidb]=omniscidb
+                        [mssql]=mssql
                         [mysql]=mysql
                         [impala]=impala)
 
