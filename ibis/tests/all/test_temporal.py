@@ -14,6 +14,7 @@ from ibis.tests.backends import (
     Clickhouse,
     Csv,
     Impala,
+    MSSQL,
     OmniSciDB,
     Pandas,
     Parquet,
@@ -391,6 +392,7 @@ def test_day_of_week_column(backend, con, alltypes, df):
         ),
     ],
 )
+@pytest.mark.xfail_backends((MSSQL,))
 @pytest.mark.xfail_unsupported
 def test_day_of_week_column_group_by(
     backend, con, alltypes, df, day_of_week_expr, day_of_week_pandas

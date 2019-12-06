@@ -8,6 +8,7 @@ from ibis.tests.backends import (
     BigQuery,
     Clickhouse,
     MySQL,
+    MSSQL,
     OmniSciDB,
     PostgreSQL,
     PySpark,
@@ -66,6 +67,7 @@ def test_coalesce(backend, con, expr, expected):
         assert result == expected
 
 
+@pytest.mark.skip_backends((MSSQL,))
 @pytest.mark.xfail_unsupported
 def test_identical_to(backend, sorted_alltypes, con, sorted_df):
     df = sorted_df
