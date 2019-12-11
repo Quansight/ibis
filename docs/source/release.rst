@@ -7,6 +7,7 @@ Release Notes
    These release notes are for versions of ibis **1.0 and later**. Release
    notes for pre-1.0 versions of ibis can be found at :doc:`/release-pre-1.0`
 
+* :feature:`1997` Add initial sql server backend support
 * :release:`1.2.1 <pending>`
 * :feature:`2035` Add support for  multi arguments window UDAF for the pandas backend
 * :bug:`2041` Change pymapd connection parameter from "session_id" to "sessionid"
