@@ -135,7 +135,7 @@ Executing expressions
    ImpalaClient.execute
    ImpalaClient.disable_codegen
 
-.. _api.postgres:
+.. _api.mssql:
 
 MSSQL client
 -----------------
