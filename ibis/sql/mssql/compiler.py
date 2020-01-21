@@ -18,9 +18,6 @@ def raise_unsupported_op_error(translator, expr, *args):
     raise com.UnsupportedOperationError(msg.format(type(op)))
 
 
-# Aggregation
-# coppied from postgresql compiler
-# support for of bit columns in aggregate methods
 def _reduction(func_name, cast_type='int32'):
     def reduction_compiler(t, expr):
         arg, where = expr.op().args
@@ -37,10 +34,6 @@ def _reduction(func_name, cast_type='int32'):
     return reduction_compiler
 
 
-# String
-# TODO: substr and find are copied from SQLite, we should really have a
-# "base" set of SQL functions that are the most common APIs across the major
-# RDBMS
 def _substr(t, expr):
     f = sa.func.substring
 
