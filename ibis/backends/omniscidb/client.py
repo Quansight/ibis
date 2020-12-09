@@ -1070,7 +1070,12 @@ class OmniSciDBClient(SQLClient):
             ast = self._build_ast(to_insert, OmniSciDBDialect.make_context())
             select = ast.queries[0]
 
-            statement = ddl.CTAS(table_name, select, database=database)
+            statement = ddl.CTAS(
+                table_name,
+                select,
+                database=database,
+                is_temporary=is_temporary,
+            )
         elif schema is not None:
             statement = ddl.CreateTableWithSchema(
                 table_name,

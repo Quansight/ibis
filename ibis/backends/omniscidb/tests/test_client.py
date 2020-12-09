@@ -331,3 +331,26 @@ def test_load_data(con, temp_table, method, format):
     result = con.table(temp_table).execute()
 
     pd.testing.assert_frame_equal(result, df_salary)
+
+
+@pytest.mark.parametrize('is_temporary', [True, False])
+def test_create_table_from_expr(con, temp_table, alltypes, is_temporary):
+    expr = alltypes[[alltypes.string_col]]
+
+    con.create_table(temp_table, expr, is_temporary=is_temporary)
+    new_expr = con.table(temp_table)
+
+    df_expr = expr.execute()
+    df_new_expr = new_expr.execute()
+
+    pd.testing.assert_frame_equal(df_expr, df_new_expr)
+
+    create_table_info = [
+        v for v in con.con.execute(f'SHOW CREATE TABLE {temp_table}')
+    ][0][0]
+
+    create_table_stmt = 'CREATE {}TABLE {}'.format(
+        'TEMPORARY ' if is_temporary else '', temp_table
+    )
+
+    assert create_table_stmt in create_table_info

@@ -101,15 +101,21 @@ class CreateTable(CreateDDL):
     ----------
     table_name : string
     database : string
+    is_temporary : bool
     """
 
-    def __init__(self, table_name, database=None):
+    def __init__(
+        self, table_name, database=None, is_temporary: bool = False,
+    ):
         self.table_name = table_name
         self.database = database
+        self.is_temporary = is_temporary
 
     @property
     def _prefix(self):
-        return 'CREATE TABLE'
+        return 'CREATE {}TABLE'.format(
+            'TEMPORARY ' if self.is_temporary else ''
+        )
 
     def _create_line(self):
         return '{} {}'.format(self._prefix, self.table_name)
@@ -168,12 +174,6 @@ class CreateTableWithSchema(CreateTable):
         self.is_temporary = is_temporary
 
     @property
-    def _prefix(self):
-        return 'CREATE {}TABLE'.format(
-            'TEMPORARY ' if self.is_temporary else ''
-        )
-
-    @property
     def with_params(self) -> Dict[str, Any]:
         """Return the parameters for `with` clause.
 
@@ -204,14 +204,11 @@ class CreateTableWithSchema(CreateTable):
 class CTAS(CreateTable):
     """Create Table As Select."""
 
-    def __init__(self, table_name, select, database=None):
+    def __init__(self, table_name, select, database=None, is_temporary=False):
         self.table_name = table_name
         self.database = database
         self.select = select
-
-    @property
-    def _prefix(self):
-        return 'CREATE TABLE'
+        self.is_temporary = is_temporary
 
     @property
     def _pieces(self):
